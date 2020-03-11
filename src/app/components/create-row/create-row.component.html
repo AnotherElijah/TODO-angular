@@ -1,1 +1,9 @@
-<p>create-row works!</p>
+<div>
+  <form (ngSubmit)="onSubmit()">
+    <label for="header">Header</label>
+    <input id="header" type="text" [(ngModel)]="header" name="header">
+    <label for="description">Description</label>
+    <input id="description" type="text" [(ngModel)]="description" name="description">
+    <button type="submit">Submit</button>
+  </form>
+</div>

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './components/list/list.component';
 import { RowComponent } from './components/row/row.component';
 import { CreateRowComponent } from './components/create-row/create-row.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -13,9 +14,10 @@ import { CreateRowComponent } from './components/create-row/create-row.component
     RowComponent,
     CreateRowComponent
   ],
-  imports: [
-    BrowserModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -3,4 +3,5 @@ export interface Row {
   description: string;
   created: string;
   active: boolean;
+  id: number;
 }

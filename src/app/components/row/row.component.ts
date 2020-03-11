@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Row} from "../../../schemas/row";
 
 @Component({
@@ -8,9 +8,14 @@ import {Row} from "../../../schemas/row";
 })
 export class RowComponent implements OnInit {
   @Input() rowData: Row;
+  @Output() delete: EventEmitter<any> = new EventEmitter();
   constructor() {}
 
   ngOnInit() {
+  }
+
+  removeRow(){
+    this.delete.emit(this.rowData.id);
   }
 
 }
