@@ -12,7 +12,7 @@ export class ListComponent implements OnInit {
     rowCreation: false
   };
   storage:Row[] = [];
-  pipe = new DatePipe('en-US')
+  pipe = new DatePipe('en-US');
   constructor() {
   }
 
@@ -35,5 +35,13 @@ export class ListComponent implements OnInit {
 
   removeRow(id){
     this.storage = this.storage.filter(value=> value.id !== id)
+  }
+
+  changeStatus(id){
+    this.storage.map(item=>{
+      if(item.id===id){
+        item.active = !item.active;
+      }
+    });
   }
 }

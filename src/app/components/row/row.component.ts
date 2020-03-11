@@ -9,13 +9,9 @@ import {Row} from "../../../schemas/row";
 export class RowComponent implements OnInit {
   @Input() rowData: Row;
   @Output() delete: EventEmitter<any> = new EventEmitter();
+  @Output() changeStatus: EventEmitter<any> = new EventEmitter();
   constructor() {}
 
   ngOnInit() {
   }
-
-  removeRow(){
-    this.delete.emit(this.rowData.id);
-  }
-
 }
