@@ -1,8 +1,8 @@
-<div [className]="rowData.active? '': 'non-actual'">
-  <div class="clickable-area" (click)="this.changeStatus.emit(this.rowData.id)">
-  <h4>{{rowData.header}}</h4>
-  <p>{{rowData.description}}</p>
-  <span>{{rowData.created}}</span>
+<div [className]="rowData.status==='finished'? '': 'non-actual'">
+  <div class="clickable-area row-container" (click)="this.changeStatus.emit(this.rowData.id)">
+    <p>{{rowData.header}}</p>
+    <p>{{rowData.description}}</p>
+    <p>{{rowData.created}}</p>
   </div>
   <button (click)="this.delete.emit(this.rowData.id)">delete</button>
 </div>

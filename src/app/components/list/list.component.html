@@ -1,3 +1,7 @@
 <button (click)="openList()">Add new</button>
-<app-create-row *ngIf="state.rowCreation" (send)="saveData($event)"></app-create-row>
-<app-row *ngFor="let row of storage" [rowData]="row" (changeStatus)="changeStatus($event)" (delete)="removeRow($event)"></app-row>
+<app-create-row *ngIf="state.rowCreation" (send)="addData($event)" (close)="state.rowCreation = false"></app-create-row>
+<div class="control-panel">
+  <button [ngClass]="state.filter==='finished'?'active':''" (click)="manageFilter('finished')">Finished tasks</button>
+  <button [ngClass]="state.filter==='unfinished'?'active':''" (click)="manageFilter('unfinished')">Unfinished tasks</button>
+</div>
+  <app-row *ngFor="let row of itemsToPresent" [rowData]="row" (changeStatus)="changeStatus($event)" (delete)="removeRow($event)"></app-row>

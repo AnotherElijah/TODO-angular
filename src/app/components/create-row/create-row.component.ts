@@ -7,6 +7,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class CreateRowComponent implements OnInit {
   @Output() send:EventEmitter<any> = new EventEmitter();
+  @Output() close:EventEmitter<any> = new EventEmitter();
   header='';
   description='';
   constructor() { }

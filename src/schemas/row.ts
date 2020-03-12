@@ -2,6 +2,6 @@ export interface Row {
   header: string;
   description: string;
   created: string;
-  active: boolean;
+  status: 'finished'|'unfinished';
   id: number;
 }
