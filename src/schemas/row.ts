@@ -1,7 +1,8 @@
 export interface Row {
   header: string;
   description: string;
-  created: string;
+  deadline: string;
+  hour: string;
   status: 'finished'|'unfinished';
   id: number;
 }

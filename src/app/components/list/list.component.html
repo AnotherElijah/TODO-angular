@@ -1,7 +1,34 @@
-<button (click)="openList()">Add new</button>
 <app-create-row *ngIf="state.rowCreation" (send)="addData($event)" (close)="state.rowCreation = false"></app-create-row>
-<div class="control-panel">
-  <button [ngClass]="state.filter==='finished'?'active':''" (click)="manageFilter('finished')">Finished tasks</button>
-  <button [ngClass]="state.filter==='unfinished'?'active':''" (click)="manageFilter('unfinished')">Unfinished tasks</button>
+
+<div class="list-container">
+  <h2 class="todo-header">TODO</h2>
+  <div class="control-panel">
+    <button [ngClass]="state.filter==='finished'?'active':''" (click)="manageFilter('finished')">Finished tasks</button>
+    <button [ngClass]="state.filter==='unfinished'?'active':''" (click)="manageFilter('unfinished')">Unfinished tasks
+    </button>
+    <button (click)="switchOrder()" *ngIf="state.order==='minToMax'">Order <i class="fa fa-caret-down"></i></button>
+    <button (click)="switchOrder()" *ngIf="state.order==='maxToMin'">Order <i class="fa fa-caret-up"></i></button>
+  </div>
+  <div class="add-btn-container row-container" (click)="openList()">
+    <div class="add-btn"><i class="fa fa-plus"></i></div>
+  </div>
+  <div class="info" *ngIf="itemsToPresent.length===0">
+    Push "+" to add your first task
+  </div>
+  <div class="doings">
+    <div
+      *ngFor="let row of itemsToPresent; let i = index"
+    >
+      <header class="time-header" *ngIf="i===0">{{itemsToPresent[i].hour}}</header>
+      <header class="time-header" *ngIf="itemsToPresent[i-1]&&itemsToPresent[i].hour!==itemsToPresent[i-1].hour">
+        <div>{{itemsToPresent[i].hour}}</div>
+      </header>
+      <app-row
+        class="row-container"
+        [rowData]="row"
+        (changeStatus)="changeStatus($event)"
+        (delete)="removeRow($event)">
+      </app-row>
+    </div>
+  </div>
 </div>
-  <app-row *ngFor="let row of itemsToPresent" [rowData]="row" (changeStatus)="changeStatus($event)" (delete)="removeRow($event)"></app-row>

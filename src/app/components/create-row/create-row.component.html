@@ -1,11 +1,15 @@
-<div>
-  <button (click)="close.emit();
-">Close</button>
-  <form (ngSubmit)="onSubmit()">
-    <label for="header">Header</label>
-    <input id="header" type="text" [(ngModel)]="header" name="header">
-    <label for="description">Description</label>
-    <input id="description" type="text" [(ngModel)]="description" name="description">
+<div class="modal">
+  <div class="modal-inner">
+  <button class="close-btn" (click)="close.emit();
+"><i class="fa fa-times"></i></button>
+  <form ngNativeValidate (ngSubmit)="onSubmit()">
+    <label class="label-1" for="header">Header</label>
+    <input id="header" type="text" [(ngModel)]="header" name="header" required>
+    <label class="label-2" for="description">Description</label>
+    <textarea id="description" [(ngModel)]="description" name="description"></textarea>
+    <label class="label-3" for="deadline">Deadline</label>
+    <input id="deadline" type="datetime-local" [(ngModel)]="deadline" name="description" required>
     <button type="submit">Submit</button>
   </form>
+</div>
 </div>

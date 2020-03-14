@@ -1,8 +1,12 @@
-<div [className]="rowData.status==='finished'? '': 'non-actual'">
-  <div class="clickable-area row-container" (click)="this.changeStatus.emit(this.rowData.id)">
-    <p>{{rowData.header}}</p>
-    <p>{{rowData.description}}</p>
-    <p>{{rowData.created}}</p>
+<div [className]="rowData.status==='finished'? 'row-inner-wrapper': 'row-inner-wrapper non-actual'">
+  <div class="clickable-area row" (click)="this.changeStatus.emit(this.rowData.id)">
+    <div class="wrapper-upper">
+      <p class="header">{{rowData.header}}</p>
+      <p class="deadline">{{rowData.deadline}}</p>
+    </div>
+    <div class="wrapper-lower">
+      <p class="description">{{rowData.description}}</p>
+    </div>
   </div>
-  <button (click)="this.delete.emit(this.rowData.id)">delete</button>
+  <button (click)="this.delete.emit(this.rowData.id)"><i class="fa fa-times"></i></button>
 </div>

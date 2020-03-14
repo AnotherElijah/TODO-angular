@@ -1,7 +1,95 @@
-.non-actual{
+@import "../../../styles.scss";
+
+.non-actual {
   color: gray;
 }
-.row-container{
+.clickable-area {
+  cursor: pointer;
+}
+.row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  border-left: $border;
+  width: 100%;
+  max-width: 510px;
+  padding: $gap-vertical $gap-horizontal;
+  @media (max-width: 650px){
+    border: 0;
+    padding: $gap-vertical 0;
+  }
+  &-inner-wrapper {
+    display: flex;
+    @media (max-width:650px){
+      padding: 0 6px;
+    }
+    button{
+      margin-left: auto;
+      background-color: $orange;
+      border: 0;
+      color: white;
+      height: 26px;
+      width: 28px;
+      border-radius: 4px;
+      font-size: 16px;
+      @media (max-width: 650px){
+        margin-top: 12px;
+      }
+    }
+  }
+  &-inner-wrapper:before {
+    content: " ";
+    width: 12px;
+    height: 12px;
+    background-color: #ff8469;
+    border: solid 6px #3c4255;
+    border-radius: 14px;
+    position: relative;
+    left: 14px;
+    top: 10px;
+    z-index: 1;
+    @media (max-width: 650px){
+      display: none;
+    }
+  }
+  &-inner-wrapper.non-actual:before{
+    background-color: $gray-light;
+  }
+
+  .wrapper-upper p{
+    display: inline-block;
+  }
+  .header{
+    font-weight: 700;
+    font-family: "Roboto", sans-serif;
+    padding: $gap-vertical/2 $gap-horizontal;
+  }
+  .deadline{
+    font-family: "Roboto Condensed", sans-serif;
+    padding: $gap-vertical/2 $gap-horizontal;
+  }
+  .description{
+    font-family: "Roboto Condensed", sans-serif;
+    padding: $gap-vertical/2 $gap-horizontal;
+    color: $gray-light;
+  }
+  p {
+    display: block;
+    padding: $gap-vertical $gap-horizontal;
+    margin: 0;
+  }
+}
+.clickable-area:hover{
+   background: $gradient-left-side;
+ }
+.non-actual{
+  p{
+    color: #585f6f;
+  }
+  .description{
+    text-decoration: line-through;
+    color: #585f6f;
+  }
+}
+.row-inner-wrapper > button:hover{
+  background-color: $orange-hover;
 }

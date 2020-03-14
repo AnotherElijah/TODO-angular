@@ -4,7 +4,8 @@ import {DatePipe} from "@angular/common";
 
 interface state {
   rowCreation: boolean;
-  filter: 'finished' | 'unfinished' | ''
+  filter: 'finished' | 'unfinished' | '';
+  order: 'minToMax'|'maxToMin';
 }
 
 @Component({
@@ -13,45 +14,56 @@ interface state {
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+
   state: state = {
     rowCreation: false,
-    filter: ''
+    filter: '',
+    order: 'minToMax'
   };
 
   storage: Row[] = [
-
     {
-      header: 'string1',
-      description: 'str1',
-      created: 'string',
+      header: 'Go to the market',
+      description: 'Buy cucumbers, tomato and water',
+      deadline: '3/13/20, 19:12',
       status: 'unfinished',
-      id: 1
+      hour: '19:00',
+      id: 1584119548801
     },
     {
-      header: 'string3',
-      description: 'str3',
-      created: 'string',
+      header: 'Congratulate my sister',
+      description: 'Last time she said that blue roses are terrible',
+      deadline: '3/13/20, 19:12',
       status: 'unfinished',
-      id: 3
+      hour: '19:00',
+      id: 1584119526103
     },
     {
-      header: 'string2',
-      description: 'str2',
-      created: 'string',
+      header: 'Kuhne + Nagel interview',
+      description: 'Change my adidas pants on something more appropriate',
+      deadline: '3/13/20, 21:02',
       status: 'finished',
-      id: 2
+      hour: '21:00',
+      id: 1584126167131
     },
     {
-      header: 'string0',
-      description: 'str0',
-      created: 'string',
+      header: 'Workout',
+      description: 'More workout less rest',
+      deadline: '3/13/20, 15:00',
       status: 'finished',
-      id: 0
+      hour: '15:00',
+      id: 1584111600
+    },
+    {
+      header: 'Wake up',
+      description: 'Wash face, get coffee',
+      deadline: '3/13/20, 10:00',
+      status: 'finished',
+      hour: '10:00',
+      id: 1584093600
     },
   ];
   itemsToPresent: Row[] = [];
-
-  pipe = new DatePipe('en-US');
 
   constructor() {
   }
@@ -65,13 +77,22 @@ export class ListComponent implements OnInit {
     this.state.rowCreation = !this.state.rowCreation;
   }
 
-  currentDate() {
-    const time = Date.now();
-    return this.pipe.transform(time, 'short');
+  pipe = new DatePipe('en-US');
+
+  dateTimePipe(unix, format:'short'|'H') {
+    return format==='short'?
+      this.pipe.transform(unix, format)
+      :this.pipe.transform(unix, format);
   }
 
   addData(data) {
-    this.storage.push({...data, created: this.currentDate(), status: 'finished', id: Date.now()});
+    this.storage.push(
+      {...data,
+        deadline: this.dateTimePipe(data.deadlineUnix,'short'),
+        hour: this.dateTimePipe(data.deadlineUnix,'H')+':00',
+        status: 'finished',
+        id: data.deadlineUnix
+      });
     this.state.rowCreation = !this.state.rowCreation;
     this.synchronizeView();
     this.sortItems();
@@ -80,7 +101,9 @@ export class ListComponent implements OnInit {
 
   removeRow(id) {
     this.storage = this.storage.filter(value => value.id !== id);
-    this.synchronizeView()
+    this.synchronizeView();
+    this.sortItems();
+    this.filterItems(this.state.filter);
   }
 
   changeStatus(id) {
@@ -91,7 +114,6 @@ export class ListComponent implements OnInit {
     });
     this.synchronizeView();
     this.sortItems();
-
   }
 
   manageFilter(criteria) {
@@ -107,17 +129,23 @@ export class ListComponent implements OnInit {
     this.synchronizeView();
     this.sortItems();
     if (criteria !== '') {
-      this.itemsToPresent = this.itemsToPresent.filter((value) => value.status === criteria)
+      this.itemsToPresent = this.itemsToPresent.filter((value) => value.status !== criteria)
     }
   }
 
   sortItems() {
+    const state = this.state;
     this.itemsToPresent.sort(function (a, b) {
-      return a.id - b.id;
+      return state.order==='minToMax'?a.id - b.id:b.id-a.id;
     });
   }
 
   synchronizeView() {
     this.itemsToPresent = JSON.parse(JSON.stringify(this.storage));
+  }
+
+  switchOrder(){
+    this.state.order = this.state.order==='minToMax'?'maxToMin':'minToMax';
+    this.sortItems();
   }
 }

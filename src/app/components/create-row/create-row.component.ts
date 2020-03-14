@@ -6,17 +6,25 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./create-row.component.scss']
 })
 export class CreateRowComponent implements OnInit {
-  @Output() send:EventEmitter<any> = new EventEmitter();
-  @Output() close:EventEmitter<any> = new EventEmitter();
-  header='';
-  description='';
-  constructor() { }
+  @Output() send: EventEmitter<any> = new EventEmitter();
+  @Output() close: EventEmitter<any> = new EventEmitter();
+  header = '';
+  description = '';
+  deadline = '';
+
+  constructor() {
+  }
+
+  toTimestamp(strDate) {
+    var datum = Date.parse(strDate);
+    return datum;
+  }
 
   ngOnInit() {
   }
 
-  onSubmit(){
-    this.send.emit({header: this.header, description: this.description});
+  onSubmit() {
+    this.send.emit({header: this.header, description: this.description, deadlineUnix: this.toTimestamp(this.deadline)});
   }
 
 }
