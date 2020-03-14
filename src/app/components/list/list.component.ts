@@ -1,12 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Row} from "../../../schemas/row";
 import {DatePipe} from "@angular/common";
-
-interface state {
-  rowCreation: boolean;
-  filter: 'finished' | 'unfinished' | '';
-  order: 'minToMax'|'maxToMin';
-}
+import {listState} from "../../../schemas/listState";
 
 @Component({
   selector: 'app-list',
@@ -15,7 +10,7 @@ interface state {
 })
 export class ListComponent implements OnInit {
 
-  state: state = {
+  state: listState = {
     rowCreation: false,
     filter: '',
     order: 'minToMax'

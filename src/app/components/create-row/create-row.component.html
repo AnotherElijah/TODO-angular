@@ -3,7 +3,7 @@
   <button class="close-btn" (click)="close.emit();
 "><i class="fa fa-times"></i></button>
   <form ngNativeValidate (ngSubmit)="onSubmit()">
-    <label class="label-1" for="header">Header</label>
+    <label class="label-1" for="header">Title</label>
     <input id="header" type="text" [(ngModel)]="header" name="header" required>
     <label class="label-2" for="description">Description</label>
     <textarea id="description" [(ngModel)]="description" name="description"></textarea>

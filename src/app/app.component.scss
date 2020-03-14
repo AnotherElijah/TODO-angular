@@ -18,6 +18,7 @@ app-list{
   background: rgba(142, 170, 199, 0.2);
   width: 100%;
   min-height: 82vh;
+  margin-bottom: 56px;
 }
 .about{
   background-color: #010920;
@@ -31,6 +32,7 @@ app-list{
   color: white;
   font-family: "Roboto Condensed", sans-serif;
   font-size: 12px;
+  z-index: 5;
   a{
     color: white;
     font-size: 12px;
